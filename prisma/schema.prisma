@@ -1,0 +1,119 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             String   @id @default(cuid())
+  name           String
+  email          String   @unique
+  phone          String?
+  password       String
+  role           String   @default("evaluator")
+  jobTitle       String?
+  departmentId   String?
+  department     Department? @relation(fields: [departmentId], references: [id])
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  departmentAccess UserDepartmentAccess[]
+  invitations      Invitation[]
+  scores           Score[]
+}
+
+model Department {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  employees  Employee[]
+  users      User[]
+  userAccess UserDepartmentAccess[]
+}
+
+model UserDepartmentAccess {
+  id           String     @id @default(cuid())
+  userId       String
+  departmentId String
+  user         User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  department   Department @relation(fields: [departmentId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, departmentId])
+}
+
+model Employee {
+  id           String   @id @default(cuid())
+  name         String
+  jobTitle     String
+  joinDate     DateTime
+  departmentId String
+  department   Department @relation(fields: [departmentId], references: [id])
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  scores Score[]
+}
+
+model Skill {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  criteria      Criterion[]
+  jobTitleLinks SkillJobTitle[]
+}
+
+model SkillJobTitle {
+  id       String @id @default(cuid())
+  skillId  String
+  jobTitle String
+  skill    Skill  @relation(fields: [skillId], references: [id], onDelete: Cascade)
+
+  @@unique([skillId, jobTitle])
+}
+
+model Criterion {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  skillId     String
+  skill       Skill    @relation(fields: [skillId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+
+  scores Score[]
+}
+
+model Score {
+  id          String    @id @default(cuid())
+  value       Int?
+  employeeId  String
+  criterionId String
+  evaluatorId String
+  employee    Employee  @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  criterion   Criterion @relation(fields: [criterionId], references: [id], onDelete: Cascade)
+  evaluator   User      @relation(fields: [evaluatorId], references: [id])
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@unique([employeeId, criterionId])
+}
+
+model Invitation {
+  id            String   @id @default(cuid())
+  email         String
+  role          String   @default("evaluator")
+  token         String   @unique
+  expiresAt     DateTime
+  accepted      Boolean  @default(false)
+  invitedById   String
+  invitedBy     User     @relation(fields: [invitedById], references: [id])
+  departmentIds String
+  createdAt     DateTime @default(now())
+}
