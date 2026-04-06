@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Employee Evaluation System
 
-## Getting Started
+A complete web application for evaluating new joiner employees with skills-based scoring, auto-evaluation suggestions, and reporting dashboards.
 
-First, run the development server:
+## Launch Instantly (One Click)
+
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nargesahmadzadeh1998/employee-evaluation-system?ref=claude/employee-evaluation-app-Q54wF&quickstart=1)
+
+**That's it.** Click the button above, wait ~2 minutes for setup, and you'll get a live URL with the app running. The database seeds automatically.
+
+**Login:** `admin@example.com` / `admin123`
+
+---
+
+## Features
+
+- **Employee Management** — Add/edit employees with department grouping
+- **Skills & Criteria** — Define evaluation skills with sub-criteria, assign to job titles
+- **Scoring System** — Department-based scoring grid with per-criterion modal evaluation (1-5 + N/A)
+- **Auto Evaluation** — System suggestions: Best fit / Good fit / Needs improvement / Not fit
+- **Reporting Dashboard** — Charts, filters by department and evaluation category
+- **Role-based Auth** — Admin and Evaluator roles with department-level access control
+- **Team Management** — Invite users via secure links with role and department assignment
+- **User Profiles** — Edit name, phone, job title, password
+
+## Tech Stack
+
+- **Framework:** Next.js 14 (App Router)
+- **Database:** SQLite via Prisma ORM
+- **Auth:** NextAuth.js (JWT)
+- **UI:** Tailwind CSS
+- **Charts:** Recharts
+
+## Login Credentials
+
+| Role | Email | Password |
+|------|-------|----------|
+| Admin | admin@example.com | admin123 |
+| Evaluator | evaluator@example.com | eval123 |
+
+## Local Development
 
 ```bash
+npm install
+npx prisma generate
+npx prisma db push
+npm run seed
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

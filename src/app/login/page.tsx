@@ -2,7 +2,7 @@
 
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -10,6 +10,13 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [initializing, setInitializing] = useState(true);
+
+  useEffect(() => {
+    fetch("/api/setup")
+      .then(() => setInitializing(false))
+      .catch(() => setInitializing(false));
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -39,6 +46,12 @@ export default function LoginPage() {
             <h1 className="text-2xl font-bold text-gray-900">EvalSystem</h1>
             <p className="text-gray-500 mt-2">Sign in to your account</p>
           </div>
+          {initializing && (
+            <div className="mb-4 bg-blue-50 text-blue-700 px-4 py-3 rounded-lg text-sm flex items-center gap-2">
+              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600" />
+              Setting up database (first run only)...
+            </div>
+          )}
           <form onSubmit={handleSubmit} className="space-y-5">
             {error && (
               <div className="bg-red-50 text-red-700 px-4 py-3 rounded-lg text-sm">
