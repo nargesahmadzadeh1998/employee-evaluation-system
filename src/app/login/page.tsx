@@ -3,9 +3,11 @@
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
+import { useLanguage } from "@/components/LanguageProvider";
 
 export default function LoginPage() {
   const router = useRouter();
+  const { t, lang, setLang } = useLanguage();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -30,7 +32,7 @@ export default function LoginPage() {
     });
 
     if (res?.error) {
-      setError("Invalid email or password");
+      setError(t.loginError);
       setLoading(false);
     } else {
       router.push("/");
@@ -42,14 +44,38 @@ export default function LoginPage() {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100">
       <div className="w-full max-w-md">
         <div className="bg-white rounded-2xl shadow-lg p-8">
+          {/* Language Selector */}
+          <div className="flex justify-center gap-2 mb-6">
+            <button
+              onClick={() => setLang("en")}
+              className={`px-4 py-2 rounded-lg text-sm font-medium transition ${
+                lang === "en"
+                  ? "bg-blue-600 text-white"
+                  : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+              }`}
+            >
+              English
+            </button>
+            <button
+              onClick={() => setLang("fa")}
+              className={`px-4 py-2 rounded-lg text-sm font-medium transition ${
+                lang === "fa"
+                  ? "bg-blue-600 text-white"
+                  : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+              }`}
+            >
+              فارسی
+            </button>
+          </div>
+
           <div className="text-center mb-8">
-            <h1 className="text-2xl font-bold text-gray-900">EvalSystem</h1>
-            <p className="text-gray-500 mt-2">Sign in to your account</p>
+            <h1 className="text-2xl font-bold text-gray-900">{t.appName}</h1>
+            <p className="text-gray-500 mt-2">{t.loginTitle}</p>
           </div>
           {initializing && (
             <div className="mb-4 bg-blue-50 text-blue-700 px-4 py-3 rounded-lg text-sm flex items-center gap-2">
               <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600" />
-              Setting up database (first run only)...
+              {t.loginSetup}
             </div>
           )}
           <form onSubmit={handleSubmit} className="space-y-5">
@@ -60,7 +86,7 @@ export default function LoginPage() {
             )}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1.5">
-                Email
+                {t.loginEmail}
               </label>
               <input
                 type="email"
@@ -73,7 +99,7 @@ export default function LoginPage() {
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1.5">
-                Password
+                {t.loginPassword}
               </label>
               <input
                 type="password"
@@ -89,11 +115,11 @@ export default function LoginPage() {
               disabled={loading}
               className="w-full bg-blue-600 text-white py-2.5 rounded-lg font-medium hover:bg-blue-700 disabled:opacity-50 transition"
             >
-              {loading ? "Signing in..." : "Sign in"}
+              {loading ? t.loginSigningIn : t.loginButton}
             </button>
           </form>
           <div className="mt-6 text-center text-xs text-gray-400">
-            Demo: admin@example.com / admin123
+            {t.loginDemo}
           </div>
         </div>
       </div>

@@ -11,3 +11,15 @@ body {
   color: var(--foreground);
   background: var(--background);
 }
+
+/* RTL support */
+[dir="rtl"] {
+  font-family: 'Vazirmatn', 'Tahoma', 'Arial', sans-serif;
+}
+
+[dir="rtl"] .text-left { text-align: right; }
+[dir="rtl"] .text-right { text-align: left; }
+[dir="rtl"] .ml-auto { margin-right: auto; margin-left: unset; }
+[dir="rtl"] .mr-3 { margin-left: 0.75rem; margin-right: unset; }
+[dir="rtl"] .pl-6 { padding-right: 1.5rem; padding-left: unset; }
+[dir="rtl"] .pr-6 { padding-left: 1.5rem; padding-right: unset; }
