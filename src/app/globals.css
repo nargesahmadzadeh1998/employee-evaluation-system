@@ -14,7 +14,11 @@ body {
 
 /* RTL support */
 [dir="rtl"] {
-  font-family: 'Vazirmatn', 'Tahoma', 'Arial', sans-serif;
+  font-family: 'IRANSansX', 'Tahoma', 'Arial', sans-serif;
+}
+
+[dir="rtl"] * {
+  font-family: 'IRANSansX', 'Tahoma', 'Arial', sans-serif;
 }
 
 [dir="rtl"] .text-left { text-align: right; }
