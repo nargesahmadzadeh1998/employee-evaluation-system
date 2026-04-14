@@ -60,11 +60,7 @@ export default function SkillsPage() {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-6">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900">{t.skillTitle}</h1>
-          <p className="text-gray-500 text-sm mt-1">{t.skillDescription}</p>
-        </div>
+      <div className="flex items-center justify-end mb-6">
         <button onClick={openNew} className="px-4 py-2 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">{t.skillAddSkill}</button>
       </div>
 

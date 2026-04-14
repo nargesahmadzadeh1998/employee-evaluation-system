@@ -80,10 +80,6 @@ export default function ScoringPage() {
   return (
     <div>
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-gray-900">{t.scoreTitle}</h1>
-        <p className="text-gray-500 text-sm mt-1">{t.scoreDescription}</p>
-      </div>
-      <div className="mb-6">
         <select value={selectedDept} onChange={(e) => setSelectedDept(e.target.value)} className="px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 outline-none">
           <option value="">{t.scoreSelectDept}</option>
           {departments.map((d) => (<option key={d.id} value={d.id}>{d.name}</option>))}

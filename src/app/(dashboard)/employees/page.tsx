@@ -62,11 +62,7 @@ export default function EmployeesPage() {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-6">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900">{t.empTitle}</h1>
-          <p className="text-gray-500 text-sm mt-1">{t.empDescription}</p>
-        </div>
+      <div className="flex items-center justify-end mb-6">
         <div className="flex gap-3">
           {role === "admin" && (
             <button onClick={() => setShowDeptModal(true)} className="px-4 py-2 text-sm border border-gray-300 rounded-lg hover:bg-gray-50 transition">

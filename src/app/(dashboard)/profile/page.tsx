@@ -31,10 +31,6 @@ export default function ProfilePage() {
 
   return (
     <div className="max-w-2xl">
-      <div className="mb-6">
-        <h1 className="text-2xl font-bold text-gray-900">{t.profTitle}</h1>
-        <p className="text-gray-500 text-sm mt-1">{t.profDescription}</p>
-      </div>
       <div className="bg-white rounded-xl border border-gray-200 p-6">
         {message && (
           <div className={`mb-4 px-4 py-3 rounded-lg text-sm ${message === t.profUpdateSuccess ? "bg-green-50 text-green-700" : "bg-red-50 text-red-700"}`}>{message}</div>

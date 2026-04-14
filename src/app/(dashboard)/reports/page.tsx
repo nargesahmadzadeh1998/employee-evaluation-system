@@ -34,10 +34,6 @@ export default function ReportsPage() {
 
   return (
     <div>
-      <div className="mb-6">
-        <h1 className="text-2xl font-bold text-gray-900">{t.repTitle}</h1>
-        <p className="text-gray-500 text-sm mt-1">{t.repDescription}</p>
-      </div>
       <div className="flex gap-4 mb-6">
         <select value={filterDept} onChange={(e) => setFilterDept(e.target.value)} className="px-4 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 outline-none">
           <option value="">{t.repAllDepartments}</option>
